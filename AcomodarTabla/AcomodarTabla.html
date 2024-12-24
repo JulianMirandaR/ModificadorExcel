@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Excel</title>
+    <link rel="stylesheet" href="/ActualizarPrecios/estilos.css">
+</head>
+<body>
+    <h1>Generar Nuevo Archivo Excel</h1>
+    <div>
+        <h3>Suba el archivo de Gnik para Limpiarlo</h3>
+    </div>
+    <div id="carga">
+        <form id="upload-form">
+            <label for="file1">Cargar Excel:</label>
+            <input type="file" id="file1" accept=".xlsx, .xls"><br><br>
+            <button type="button" onclick="generateExcel()">Generar Excel</button>
+        </form>
+        <a id="download-link" style="display: none;">Descargar Nuevo Archivo</a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="/AcomodarTabla/AppTabla.js"></script>
+</body>
+</html>

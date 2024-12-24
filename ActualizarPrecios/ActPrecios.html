@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Precios de Productos</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <h1>Actualizar Precios de Productos</h1>
+    <div>
+        <h3>Asegurese de que los SKU esten en la Columna 1 y los precios en la columna 2</h2>
+    </div>
+    <div id="carga">
+        <form id="upload-form">
+            <label for="file1">Cargar Excel de Precios Nuevos:</label>
+            <input type="file" id="file1" accept=".xlsx, .xls"><br><br>
+            <label for="file2">Cargar Excel de Lista Completa de Productos:</label>
+            <input type="file" id="file2" accept=".xlsx, .xls"><br><br>
+            <button type="button" onclick="processFiles()">Actualizar Precios</button>
+        </form>
+        <a id="download-link" style="display: none;">Descargar Archivo Actualizado</a>
+    </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="/ActualizarPrecios/app.js"></script>
+</body>
+</html>

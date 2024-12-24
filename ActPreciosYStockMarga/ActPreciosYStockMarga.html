@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Precios y Stock en Margaria.ar</title>
+    <link rel="stylesheet" href="/ActualizarPrecios/estilos.css">
+</head>
+<body>
+    <h1>Actualizar Precios y Stock</h1>
+    <div>
+        <h3>Asegúrese de que los SKUs estén en la Columna 1, los precios en la Columna K, y el stock en la Columna F</h3>
+    </div>
+    <div id="carga">
+        <form id="upload-form">
+            <label for="file1">Cargar Excel de Precios y Stock Nuevos:</label>
+            <input type="file" id="file1" accept=".xlsx, .xls"><br><br>
+            <label for="file2">Cargar Excel de Lista Completa de Productos:</label>
+            <input type="file" id="file2" accept=".xlsx, .xls"><br><br>
+            <button type="button" onclick="processFiles()">Actualizar Precios y Stock</button>
+        </form>
+        <a id="download-link" style="display: none;">Descargar Archivo Actualizado</a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="/ActPreciosYStockMarga/appPrecioYStock.js"></script>
+</body>
+</html>
