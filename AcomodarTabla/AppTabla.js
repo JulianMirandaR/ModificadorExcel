@@ -1,4 +1,3 @@
-
 function generateExcel() {
     const file = document.getElementById('file1').files[0];
 
@@ -9,7 +8,7 @@ function generateExcel() {
 
     const reader = new FileReader();
 
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         const data = new Uint8Array(e.target.result);
         const workbook = XLSX.read(data, { type: 'array' });
         const sheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -21,7 +20,7 @@ function generateExcel() {
             const description = row[3] || ''; // Columna 4
             const stock = row[5] || ''; // Columna 6
             let pvp = row[10]; // Columna 11 (K)
-            
+
             if (pvp != null && !isNaN(pvp)) {
                 pvp = Math.floor(parseFloat(pvp) * 1.21); // Aplica el IVA y elimina decimales
             } else {
@@ -38,7 +37,7 @@ function generateExcel() {
         // Crear un nuevo archivo Excel con los datos en formato de tabla
         const newSheet = XLSX.utils.aoa_to_sheet(finalData);
 
-        // Convertir rango a tabla
+        // Agregar AutoFiltro al rango de datos
         const range = XLSX.utils.decode_range(newSheet['!ref']);
         newSheet['!autofilter'] = { ref: XLSX.utils.encode_range(range) };
 
