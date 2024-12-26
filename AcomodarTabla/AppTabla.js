@@ -34,12 +34,8 @@ function generateExcel() {
         const headers = ['SKU', 'Descripción', 'Stock Físico', 'PVP'];
         const finalData = [headers, ...processedData];
 
-        // Crear un nuevo archivo Excel con los datos en formato de tabla
+        // Crear un nuevo archivo Excel
         const newSheet = XLSX.utils.aoa_to_sheet(finalData);
-
-        // Agregar AutoFiltro al rango de datos
-        const range = XLSX.utils.decode_range(newSheet['!ref']);
-        newSheet['!autofilter'] = { ref: XLSX.utils.encode_range(range) };
 
         const newWorkbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(newWorkbook, newSheet, 'Nuevo Archivo');
