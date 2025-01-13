@@ -13,7 +13,13 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f9;
+            background-color: #efecec;
+        }
+        .logo {
+            width: 200px; /* Ajusta el tamaño a conveniencia */
+            height: auto;
+            display: block;
+            margin: 0 auto 20px; 
         }
 
         .menu {
@@ -27,7 +33,7 @@
         .menu h1 {
             font-size: 24px;
             margin-bottom: 20px;
-            color: #333;
+            color: #212121;
         }
 
         .menu button {
@@ -47,18 +53,16 @@
         .menu button:hover {
             background: #0056b3;
         }
-
-        .menu a {
-            text-decoration: none;
-            color: #fff;
-        }
     </style>
 </head>
 <body>
+    <img src="/img/Imagen de WhatsApp 2025-01-10 a las 16.00.14_c3f9ccde.jpg" alt="Logo" class="logo">
     <div class="menu">
         <h1>Modificador de Excel</h1>
-        <button><a href="ActualizarPrecios/ActPrecios.html">Actualizar solo Precios</a></button>
-        <button><a href="ActPreciosYStockMarga/ActPreciosYStockMarga.html">Actualizar Precios y Stock en Margaria.ar</a></button>
-        <button><a href="AcomodarTabla/AcomodarTabla.html">Limpiar Tabla de Gnik</a></button>
+        
+        <button onclick="location.href='ActualizarPrecios/ActPrecios.html'">Actualizar teniendo solo Sku y Precios</button>
+        <button onclick="location.href='ActPreciosYStockMarga/ActPreciosYStockMarga.html'">Actualizar Precios y Stock en Margaria.ar</button>
+        <button onclick="location.href='AcomodarTabla/AcomodarTabla.html'">Limpiar Tabla de Gnik</button>
     </div>
+</body>
 </html>
