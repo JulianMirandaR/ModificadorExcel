@@ -1,6 +1,6 @@
 function generateCombinedExcel() {
     const file1 = document.getElementById('file1').files[0]; // GNIK
-    const file2 = document.getElementById('file2').files[0]; // Stock/DOT
+    const file2 = document.getElementById('file2').files[0]; // Stock/DOT (principal)
     const file3 = document.getElementById('file3').files[0]; // Costo
 
     if (!file1 || !file2 || !file3) {
@@ -13,41 +13,53 @@ function generateCombinedExcel() {
         const stockRows = XLSX.utils.sheet_to_json(stockData.Sheets[stockData.SheetNames[0]], { header: 1 });
         const costoRows = XLSX.utils.sheet_to_json(costoData.Sheets[costoData.SheetNames[0]], { header: 1 });
 
-        const stockMap = new Map();
+        const gnikMap = new Map();
         const costoMap = new Map();
 
-        // Armar stock y dot map
-        for (let i = 1; i < stockRows.length; i++) {
-            const sku = (stockRows[i][0] || '').toString().replace(/^ /, '');
-            const stock = (stockRows[i][2] || '').toString().replace(/^ /, '');
-            const dot = stockRows[i][3] || '';
-            stockMap.set(sku, { stock, dot });
+        // Armar map de GNIK (clave: SKU)
+        for (let i = 6; i < gnikRows.length; i++) {
+            const sku = (gnikRows[i][2] || '').toString().replace(/^'/, '');
+            const descripcion = gnikRows[i][3] || '';
+            const precioBase = parseFloat(gnikRows[i][10]);
+            const pvpConIVA = precioBase ? Math.floor(precioBase * 1.21) : '';
+            gnikMap.set(sku, { descripcion, pvpConIVA });
         }
 
-        // Armar costo map
+        // Armar map de costo (clave: SKU)
         for (let i = 1; i < costoRows.length; i++) {
             const sku = (costoRows[i][0] || '').toString().replace(/^'/, '');
             const costo = parseFloat(costoRows[i][5]) || 0;
             costoMap.set(sku, costo);
         }
 
-        // Procesar GNIK
+        // Procesar desde archivo 2 (Stock/DOT)
         const finalData = [
             ['SKU', 'Descripción', 'PVP con IVA', 'Stock', 'DOT', 'Precio Costo', 'Precio ML', 'Precio Mínimo']
         ];
 
-        for (let i = 6; i < gnikRows.length; i++) {
-            const row = gnikRows[i];
-            const sku = (row[2] || '').toString().replace(/^'/, '');
-            const descripcion = row[3] || '';
-            const precioBase = parseFloat(row[10]);
-            const pvpConIVA = precioBase ? Math.floor(precioBase * 1.21) : '';
+        for (let i = 1; i < stockRows.length; i++) {
+            const row = stockRows[i];
+            const sku = (row[0] || '').toString().replace(/^'/, '');
+            if (!sku) continue;
 
-            const stockDot = stockMap.get(sku) || { stock: '', dot: '' };
-            const costo = costoMap.get(sku) || '';
+            let stock = row[2];
+            if (stock != null && stock !== '') {
+                stock = parseInt(stock.toString().replace(/\s/g, ''));
+                if (isNaN(stock)) stock = null;
+            } else {
+                stock = null;
+            }
+            const dot = row[3] || '';
 
-            let precioML = '';
-            let precioMin = '';
+            const gnik = gnikMap.get(sku) || {};
+            const descripcion = gnik.descripcion || '';
+            const pvpConIVA = gnik.pvpConIVA || '';
+
+            let costo = costoMap.get(sku) || '';
+            if (costo) {
+                costo = Math.round(costo);
+            }
+            let precioML = '', precioMin = '';
 
             if (costo) {
                 precioML = Math.round(costo / 0.87 / 0.87 / 0.98 + 15000);
@@ -55,9 +67,7 @@ function generateCombinedExcel() {
             }
 
             finalData.push([
-                sku, descripcion, pvpConIVA,
-                stockDot.stock, stockDot.dot,
-                costo || '', precioML, precioMin
+                sku, descripcion, pvpConIVA, stock, dot, costo || '', precioML, precioMin
             ]);
         }
 
