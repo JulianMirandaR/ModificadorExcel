@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generar Excel Combinado</title>
+  <link rel="stylesheet" href="./stiles.css">
+</head>
+<body>
+  <h1>Generar Archivo Excel Combinado</h1>
+  <form id="upload-form">
+    <label>Cargar archivo de GNIK:</label>
+    <input type="file" id="file1" accept=".xlsx, .xls"><br><br>
+
+    <label>Cargar archivo Asset Tigger:</label>
+    <input type="file" id="file2" accept=".xlsx, .xls"><br><br>
+
+    <label>Cargar archivo Precio/Costos:</label>
+    <input type="file" id="file3" accept=".xlsx, .xls"><br><br>
+
+    <button type="button" onclick="generateCombinedExcel()">Generar Excel</button>
+  </form>
+
+  <a id="download-link" style="display:none">Descargar Excel</a>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="./appExcelCompleto.js"></script>
+</body>
+</html>
