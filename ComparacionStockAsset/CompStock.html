@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Comparar Stock entre dos Excels</title>
+    <link rel="stylesheet" href="./stiles.css">
+</head>
+<body>
+    <h1>Comparar Stocks de Neumáticos</h1>
+    <form>
+        <label>Subir Excel viejo:</label>
+        <input type="file" id="fileOld" accept=".xlsx, .xls"><br><br>
+
+        <label>Subir Excel nuevo:</label>
+        <input type="file" id="fileNew" accept=".xlsx, .xls"><br><br>
+
+        <button type="button" onclick="compareStocks()">Comparar</button>
+    </form>
+
+    <h2>Resultados:</h2>
+    <pre id="resultados"></pre>
+    <a id="download-link" style="display: none;">Descargar Resultados en Excel</a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="./CompStock.js"></script>
+    
+</body>
+</html>
