@@ -28,7 +28,7 @@ function generateCombinedExcel() {
         // Armar map de costo (clave: SKU)
         for (let i = 1; i < costoRows.length; i++) {
             const sku = (costoRows[i][0] || '').toString().replace(/^'/, '');
-            const costo = parseFloat(costoRows[i][5]) || 0;
+            const costo = parseFloat(costoRows[i][1]) || 0;
             costoMap.set(sku, costo);
         }
 
@@ -62,8 +62,8 @@ function generateCombinedExcel() {
             let precioML = '', precioMin = '';
 
             if (costo) {
-                precioML = Math.round(costo / 0.87 / 0.87 / 0.98 + 15000);
-                precioMin = Math.round(costo / 0.95 / 0.87 / 0.98 + 15000);
+                precioML = Math.round(costo *1.21/ 0.87 / 0.87 / 0.98 + 15000);
+                precioMin = Math.round(costo *1.21/ 0.95 / 0.87 / 0.98 + 15000);
             }
 
             finalData.push([
