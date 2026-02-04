@@ -4,23 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualizar Precios y Stock en Margaria.ar</title>
-    <link rel="stylesheet" href="stiles.css">
+    <link rel="stylesheet" href="../stiles.css">
 </head>
 <body>
     <h1>Actualizar Precios y Stock</h1>
     <div>
         <h3>Asegúrese de que los SKUs estén en la Columna 1, los precios en la Columna K, y el stock en la Columna F</h3>
     </div>
+    <div id="status-message" class="status-message"></div>
+
     <div id="carga">
         <form id="upload-form">
-            <label for="file1">Cargar Excel de Precios y Stock Nuevos:</label>
-            <input type="file" id="file1" accept=".xlsx, .xls"><br><br>
-            <label for="file2">Cargar Excel de Lista Completa de Productos:</label>
-            <input type="file" id="file2" accept=".xlsx, .xls"><br><br>
+            <label for="file1" class="custom-file-upload">
+                Seleccionar Excel de Precios y Stock
+            </label>
+            <input type="file" id="file1" accept=".xlsx, .xls" onchange="updateFileName(this)">
+            <span id="file1-name" class="file-name">Ningún archivo seleccionado</span>
+
+            <label for="file2" class="custom-file-upload">
+                Seleccionar Excel de Lista Completa
+            </label>
+            <input type="file" id="file2" accept=".xlsx, .xls" onchange="updateFileName(this)">
+            <span id="file2-name" class="file-name">Ningún archivo seleccionado</span>
+
             <button type="button" onclick="processFiles()">Actualizar Precios y Stock</button>
         </form>
         <a id="download-link" style="display: none;">Descargar Archivo Actualizado</a>
     </div>
+
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <p>Procesando archivos...</p>
+    </div>
+
+    <button class="btn-back" onclick="location.href='../index.html'">Volver al Menú</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="./appPrecioYStock.js"></script>
